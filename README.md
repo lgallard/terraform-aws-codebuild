@@ -3,7 +3,6 @@
 ## Usage
 
 ```
-
 module "myapp-project" {
   source = "../modules/terraform-aws-codebuild"
 
@@ -14,8 +13,6 @@ module "myapp-project" {
     type = "GITHUB"
     location = "https://myaccount@github.com/myorg/myapp.git"
     version = "master"
-    # The below line (or block) should be added by the module
-    #auth_resource = "GITHUB" 
 
     # The below line should be added by the module (only valid when type is `BITBUCKET` or `GITHUB`
     #auth_resource = "GITHUB" 
@@ -41,6 +38,22 @@ module "myapp-project" {
     ]
   }
 
+  artifacts = {
+    type = "S3"
+    location = "mybucket"
+    path = "/path/
+    name = "myapp.zip"
+    packing = "ZIP"
+  }
+
+  # optional
+
+  cache = {
+    type = "S3"
+    location = "mycachebucket"
+    path = "/path/
+
+  }
  
   # Logs
   cloudwatch_logs {
