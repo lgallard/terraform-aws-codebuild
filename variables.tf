@@ -1,8 +1,64 @@
+# Artifacts
 variable "artifacts" {
   description = "Information about the project's build output artifacts."
   type        = map
 }
 
+variable "artifacts_type" {
+  description = "The build output artifact's type. Valid values for this parameter are: CODEPIPELINE, NO_ARTIFACTS or S3."
+  type        = string
+  default     = "NO_ARTIFACTS"
+}
+
+variable "artifacts_artifact_identifier" {
+  description = "The artifact identifier. Must be the same specified inside AWS CodeBuild buildspec."
+  type        = string
+  default     = null
+}
+
+variable "artifacts_encryption_disabled" {
+  description = "If set to true, output artifacts will not be encrypted. If type is set to NO_ARTIFACTS then this value will be ignored."
+  type        = bool
+  default     = false
+}
+
+variable "artifacts_override_artifact_name" {
+  description = "If set to true, a name specified in the build spec file overrides the artifact name."
+  type        = bool
+  default     = true
+}
+
+variable "artifacts_location" {
+  description = "Information about the build output artifact location. If type is set to CODEPIPELINE or NO_ARTIFACTS then this value will be ignored. If type is set to S3, this is the name of the output bucket."
+  type        = string
+  default     = null
+}
+
+variable "artifacts_name" {
+  description = "The name of the project. If type is set to S3, this is the name of the output artifact object."
+  type        = string
+  default     = null
+}
+
+variable "artifacts_namespace_type" {
+  description = "The namespace to use in storing build artifacts. If type is set to S3, then valid values for this parameter are: `BUILD_ID` or `NONE`."
+  type        = string
+  default     = null
+}
+
+variable "artifacts_packaging" {
+  description = "The type of build output artifact to create. If type is set to S3, valid values for this parameter are: NONE or ZIP"
+  type        = string
+  default     = null
+}
+
+variable "artifacts_path" {
+  description = "If type is set to S3, this is the path to the output artifact"
+  type        = string
+  default     = ""
+}
+
+# Environment
 variable "environment" {
   description = "Information about the project's build environment."
   type        = map
