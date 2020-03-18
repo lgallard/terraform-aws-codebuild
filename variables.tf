@@ -5,7 +5,7 @@ variable "artifacts" {
 }
 
 variable "artifacts_type" {
-  description = "The build output artifact's type. Valid values for this parameter are: CODEPIPELINE, NO_ARTIFACTS or S3."
+  description = "The build output artifact's type. Valid values for this parameter are: `CODEPIPELINE`, `NO_ARTIFACTS` or `S3`."
   type        = string
   default     = "NO_ARTIFACTS"
 }
@@ -17,7 +17,7 @@ variable "artifacts_artifact_identifier" {
 }
 
 variable "artifacts_encryption_disabled" {
-  description = "If set to true, output artifacts will not be encrypted. If type is set to NO_ARTIFACTS then this value will be ignored."
+  description = "If set to true, output artifacts will not be encrypted. If `type` is set to `NO_ARTIFACTS` then this value will be ignored."
   type        = bool
   default     = false
 }
@@ -29,33 +29,52 @@ variable "artifacts_override_artifact_name" {
 }
 
 variable "artifacts_location" {
-  description = "Information about the build output artifact location. If type is set to CODEPIPELINE or NO_ARTIFACTS then this value will be ignored. If type is set to S3, this is the name of the output bucket."
+  description = "Information about the build output artifact location. If `type` is set to `CODEPIPELINE` or `NO_ARTIFACTS` then this value will be ignored. If `type` is set to `S3`, this is the name of the output bucket."
   type        = string
   default     = null
 }
 
 variable "artifacts_name" {
-  description = "The name of the project. If type is set to S3, this is the name of the output artifact object."
+  description = "The name of the project. If `type` is set to `S3`, this is the name of the output artifact object."
   type        = string
   default     = null
 }
 
 variable "artifacts_namespace_type" {
-  description = "The namespace to use in storing build artifacts. If type is set to S3, then valid values for this parameter are: `BUILD_ID` or `NONE`."
+  description = "The namespace to use in storing build artifacts. If `type` is set to `S3`, then valid values for this parameter are: `BUILD_ID` or `NONE`."
   type        = string
   default     = null
 }
 
 variable "artifacts_packaging" {
-  description = "The type of build output artifact to create. If type is set to S3, valid values for this parameter are: NONE or ZIP"
+  description = "The type of build output artifact to create. If `type` is set to `S3`, valid values for this parameter are: `NONE` or `ZIP`"
   type        = string
   default     = null
 }
 
 variable "artifacts_path" {
-  description = "If type is set to S3, this is the path to the output artifact"
+  description = "If `type` is set to `S3`, this is the path to the output artifact"
   type        = string
   default     = ""
+}
+
+# Cache
+variable "cache_type" {
+  description = "The type of storage that will be used for the AWS CodeBuild project cache. Valid values: `NO_CACHE`, `LOCAL`, and `S3`."
+  type        = string
+  default     = "NO_CACHE"
+}
+
+variable "cache_location" {
+  description = "The location where the AWS CodeBuild project stores cached resources. For type S3 the value must be a valid S3 bucket name/prefix. (Required when cache `type` is `S3`)"
+  type        = string
+  default     = null
+}
+
+variable "cache_modes" {
+  description = "Specifies settings that AWS CodeBuild uses to store and reuse build dependencies. Valid values: `LOCAL_SOURCE_CACHE`, `LOCAL_DOCKER_LAYER_CACHE`, and `LOCAL_CUSTOM_CACHE`. (Required when cache type is `LOCAL`)"
+  type        = string
+  default     = []
 }
 
 # Environment

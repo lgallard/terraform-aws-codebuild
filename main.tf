@@ -32,7 +32,6 @@ resource "aws_codebuild_project" "cb_project" {
       modes    = lookup(cache.value, "modes")
     }
   }
-
 }
 
 locals {
@@ -51,7 +50,12 @@ locals {
     path                   = lookup(var.artifacts, "path", null) == null ? var.artifacts_path : lookup(var.artifacts, "path")
   }
 
-  # Cahche
+  # Cache
   # If no cache is provided, build cache config using the default values
+  cache = {
+    type     = lookup(var.cache, "type", null) == null ? var.cache_type : lookup(var.cache, "type")
+    location = lookup(var.cache, "location", null) == null ? var.cache_location : lookup(var.cache, "location")
+    modes    = lookup(var.cache, "modes", null) == null ? var.cache_modes : lookup(var.cache, "modes")
+  }
 
 }
