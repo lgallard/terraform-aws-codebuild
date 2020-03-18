@@ -1,5 +1,4 @@
 resource "aws_codebuild_project" "cb_project" {
-
   name           = var.name
   badge_enabled  = var.badge_enabled
   build_timeout  = var.build_timeout
