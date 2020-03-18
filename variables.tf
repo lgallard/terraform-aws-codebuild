@@ -122,6 +122,12 @@ variable "description" {
   default     = null
 }
 
+variable "encryption_key" {
+  description = "The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts."
+  type        = string
+  default     = null
+}
+
 variable "cloudwatch_logs" {
   description = "Configuration for the builds to store log data to CloudWatch."
   type        = map

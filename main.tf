@@ -1,9 +1,10 @@
 resource "aws_codebuild_project" "cb_project" {
 
   name           = var.name
-  description    = var.description
   badge_enabled  = var.badge_enabled
   build_timeout  = var.build_timeout
+  description    = var.description
+  encryption_key = var.encryption_key
   service_role   = aws_iam_role.service_role.arn
   queued_timeout = var.queued_timeout
 
