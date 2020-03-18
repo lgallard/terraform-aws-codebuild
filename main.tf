@@ -33,6 +33,29 @@ resource "aws_codebuild_project" "cb_project" {
       modes    = lookup(cache.value, "modes")
     }
   }
+
+  # Environment
+  dynamic "environment" {
+    for_each = [local.environment]
+    content {
+      compuer_type                = lookup(environment.value, "computer_type")
+      image                       = lookup(environment.value, "image")
+      type                        = lookup(environment.value, "type")
+      image_pull_credentials_type = lookup(environment.value, "type")
+      privileged_mode             = lookup(environment.value, "privileged_mode")
+      certificate                 = lookup(environment.value, "certificate")
+      registry_credential         = lookup(environment.value, "registry_credential")
+
+      # Environment variables
+      dynamic "environment_variable" {
+        for_each = length(lookup(environment.value, "environment_variables"), {}) == 0 ? [] : [lookup(environment.value, "environment_variables", {})]
+        content {
+          name  = environment_variable.value.name
+          value = environment_variable.value.value
+        }
+      }
+    }
+  }
 }
 
 locals {
