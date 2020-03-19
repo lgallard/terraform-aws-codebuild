@@ -83,6 +83,19 @@ variable "environment" {
   type        = map
 }
 
+variable "environment_computer_type" {
+  description = "Information about the compute resources the build project will use. Available values for this parameter are: `BUILD_GENERAL1_SMALL`, `BUILD_GENERAL1_MEDIUM`, `BUILD_GENERAL1_LARGE` or `BUILD_GENERAL1_2XLARGE`. `BUILD_GENERAL1_SMALL` is only valid if type is set to `LINUX_CONTAINER`. When type is set to `LINUX_GPU_CONTAINER`, compute_type need to be `BUILD_GENERAL1_LARGE`."
+  type        = string
+  default     = "BUILD_GENERAL1_MEDIUM"
+}
+
+variable "environment_image" {
+  description = "The Docker image to use for this build project. Valid values include Docker images provided by CodeBuild (e.g `aws/codebuild/standard:2.0`), Docker Hub images (e.g. `hashicorp/terraform:latest`), and full Docker repository URIs such as those for ECR (e.g. `137112412989.dkr.ecr.us-west-2.amazonaws.com/amazonlinux:latest`)"
+  type        = string
+  default     = "aws/codebuild/standard:2.0"
+}
+
+# General vars
 variable "name" {
   description = "The projects name."
   type        = string

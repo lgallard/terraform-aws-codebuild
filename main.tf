@@ -60,7 +60,7 @@ resource "aws_codebuild_project" "cb_project" {
 locals {
 
   # Artifacts
-  # If no artifacts are provided, build artifacts config using the default values
+  # If no artifacts block is provided, build artifacts config using the default values
   artifacts = {
     type                   = lookup(var.artifacts, "type", null) == null ? var.artifacts_type : lookup(var.artifacts, "type")
     artifact_identifier    = lookup(var.artifacts, "artifact_identifier", null) == null ? var.artifacts_artifact_identifier : lookup(var.artifacts, "artifact_identifier")
@@ -74,11 +74,18 @@ locals {
   }
 
   # Cache
-  # If no cache is provided, build cache config using the default values
+  # If no cache block is provided, build cache config using the default values
   cache = {
     type     = lookup(var.cache, "type", null) == null ? var.cache_type : lookup(var.cache, "type")
     location = lookup(var.cache, "location", null) == null ? var.cache_location : lookup(var.cache, "location")
     modes    = lookup(var.cache, "modes", null) == null ? var.cache_modes : lookup(var.cache, "modes")
+  }
+
+  # Environmet
+  # If no enviroment block is provided, build environment block using the default values
+  environment = {
+    computer_type = lookup(var.environment, "computer_type", null) == null ? var.environment_computer_type : lookup(var.environment, "computer_type")
+    image         = lookup(var.environment, "image", null) == null ? var.environment_image : lookup(var.environment, "image")
   }
 
 }
