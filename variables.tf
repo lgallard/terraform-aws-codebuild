@@ -59,6 +59,10 @@ variable "artifacts_path" {
 }
 
 # Cache
+variable "cache" {
+  description = "Information about the cache storage for the project."
+  type        = map
+}
 variable "cache_type" {
   description = "The type of storage that will be used for the AWS CodeBuild project cache. Valid values: `NO_CACHE`, `LOCAL`, and `S3`."
   type        = string
