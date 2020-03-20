@@ -99,6 +99,42 @@ variable "environment_image" {
   default     = "aws/codebuild/standard:2.0"
 }
 
+variable "environment_type" {
+  description = "The type of build environment to use for related builds. Available values are: `LINUX_CONTAINER`, `LINUX_GPU_CONTAINER`, `WINDOWS_CONTAINER` or `ARM_CONTAINER`."
+  type        = string
+  default     = "LINUX_CONTAINER"
+}
+
+variable "environment_image_pull_credentials_type" {
+  description = "The type of credentials AWS CodeBuild uses to pull images in your build. Available values for this parameter are `CODEBUID` or `SERVICE_ROLE`. When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials."
+  type        = string
+  default     = "CODEBUILD"
+}
+
+variable "environment_variables" {
+  description = "A list of sets of environment variables to make available to builds for this build project."
+  type        = list
+  default     = []
+}
+
+variable "environment_privileged_mode" {
+  description = "If set to true, enables running the Docker daemon inside a Docker container."
+  type        = bool
+  default     = false
+}
+
+variable "environment_certificate" {
+  description = "The ARN of the S3 bucket, path prefix and object key that contains the PEM-encoded certificate."
+  type        = string
+  default     = null
+}
+
+variable "environment_registry_credential" {
+  description = "Information about credentials for access to a private Docker registry. Registry Credential config blocks are documented below."
+  type        = map
+  default     = null
+}
+
 # General vars
 variable "name" {
   description = "The projects name."

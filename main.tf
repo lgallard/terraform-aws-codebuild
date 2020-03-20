@@ -45,9 +45,18 @@ resource "aws_codebuild_project" "cb_project" {
       certificate                 = lookup(environment.value, "certificate")
       registry_credential         = lookup(environment.value, "registry_credential")
 
+      # Registry Credential
+      dynamic "registry_credential" {
+        for_each = length(lookup(environment.value, "registry_credential"), {}) == 0 ? [] : [lookup(environment.value, "registry_credential", {})]
+        content {
+          credential          = registry_credential.value.credential
+          credential_provider = registry_credential.value.credential_provider
+        }
+      }
+
       # Environment variables
       dynamic "environment_variable" {
-        for_each = length(lookup(environment.value, "environment_variables"), {}) == 0 ? [] : [lookup(environment.value, "environment_variables", {})]
+        for_each = length(lookup(environment.value, "variables"), {}) == 0 ? [] : [lookup(environment.value, "variables", {})]
         content {
           name  = environment_variable.value.name
           value = environment_variable.value.value
@@ -84,8 +93,14 @@ locals {
   # Environmet
   # If no enviroment block is provided, build environment block using the default values
   environment = {
-    computer_type = lookup(var.environment, "computer_type", null) == null ? var.environment_computer_type : lookup(var.environment, "computer_type")
-    image         = lookup(var.environment, "image", null) == null ? var.environment_image : lookup(var.environment, "image")
+    computer_type               = lookup(var.environment, "computer_type", null) == null ? var.environment_computer_type : lookup(var.environment, "computer_type")
+    image                       = lookup(var.environment, "image", null) == null ? var.environment_image : lookup(var.environment, "image")
+    type                        = lookup(var.environment, "type", null) == null ? var.environment_type : lookup(var.environment, "type")
+    image_pull_credentials_type = lookup(var.environment, "image_pull_credentials_type", null) == null ? var.environment_image_pull_credentials_type : lookup(var.environment, "image_pull_credentials_type")
+    variables                   = lookup(var.environment, "variables", null) == null ? var.environment_variables : lookup(var.environment, "variables")
+    privileged_mode             = lookup(var.environment, "privileged_mode", null) == null ? var.environment_privileged_mode : lookup(var.environment, "privileged_mode")
+    certificate                 = lookup(var.environment, "certificate ", null) == null ? var.environment_certificate : lookup(var.environment, "certificate")
+    registry_credential         = lookup(var.environment, "registry_credential", null) == null ? var.environment_registry_credential : lookup(var.environment, "registry_credential")
   }
 
 }
