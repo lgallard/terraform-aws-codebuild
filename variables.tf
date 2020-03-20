@@ -192,3 +192,4 @@ variable "s3_logs" {
   type        = map
   default     = null
 }
+
