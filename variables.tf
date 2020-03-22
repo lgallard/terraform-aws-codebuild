@@ -63,6 +63,7 @@ variable "cache" {
   description = "Information about the cache storage for the project."
   type        = map
 }
+
 variable "cache_type" {
   description = "The type of storage that will be used for the AWS CodeBuild project cache. Valid values: `NO_CACHE`, `LOCAL`, and `S3`."
   type        = string
@@ -135,6 +136,55 @@ variable "environment_registry_credential" {
   default     = null
 }
 
+# Logs
+variable "cloudwatch_logs" {
+  description = "Configuration for the builds to store log data to CloudWatch."
+  type        = map
+  default     = null
+}
+
+variable "cloudwatch_logs_status" {
+  description = "Current status of logs in CloudWatch Logs for a build project. Valid values: `ENABLED`, `DISABLED."
+  type        = string
+  default     = "ENABLED"
+}
+
+variable "group_name" {
+  description = "The group name of the logs in CloudWatch Logs."
+  type        = string
+  default     = null
+}
+
+variable "stream_name" {
+  description = "The stream name of the logs in CloudWatch Logs."
+  type        = string
+  default     = null
+}
+
+variable "s3_logs" {
+  description = "Configuration for the builds to store log data to S3."
+  type        = map
+  default     = null
+}
+
+variable "s3_logs_status" {
+  description = "Current status of logs in S3 for a build project. Valid values: `ENABLED`, `DISABLED."
+  type        = string
+  default     = "DISABLED"
+}
+
+variable "s3_logs_location" {
+  description = "The name of the S3 bucket and the path prefix for S3 logs. Must be set if status is ENABLED, otherwise it must be empty."
+  type        = string
+  default     = null
+}
+
+variable "s3_logs_encryption_disabled" {
+  description = "Set to true if you do not want S3 logs encrypted."
+  type        = string
+  default     = true
+}
+
 # General vars
 variable "name" {
   description = "The projects name."
@@ -192,4 +242,3 @@ variable "s3_logs" {
   type        = map
   default     = null
 }
-
