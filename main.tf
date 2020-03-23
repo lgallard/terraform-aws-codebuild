@@ -92,6 +92,31 @@ resource "aws_codebuild_project" "cb_project" {
 
     }
   }
+
+  # Source
+  dynamic "source" {
+    for_each = local.source
+    content {
+      type                  = lookup(source.value, "type")
+      auth                  = lookup(source.value, "auth")
+      buildspec             = lookup(source.value, "buildspec")
+      git_clone_depth       = lookup(source.value, "git_clone_depth")
+      git_submodules_config = lookup(source.value, "git_submodules_config")
+      insecure_ssl          = lookup(source.value, "insecure_ssl")
+      location              = lookup(source.value, "location")
+      report_build_status   = lookup(source.value, "report_build_status")
+
+      # Auth
+      dynamic "auth" {
+        for_each = [lookup(source.value, "auth")]
+        content {
+          type     = auth.value.type
+          resource = auth.value.resource
+        }
+      }
+
+    }
+  }
 }
 
 locals {
