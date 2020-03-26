@@ -98,7 +98,6 @@ resource "aws_codebuild_project" "cb_project" {
     for_each = local.source
     content {
       type                  = lookup(source.value, "type")
-      auth                  = lookup(source.value, "auth")
       buildspec             = lookup(source.value, "buildspec")
       git_clone_depth       = lookup(source.value, "git_clone_depth")
       git_submodules_config = lookup(source.value, "git_submodules_config")
