@@ -97,13 +97,12 @@ resource "aws_codebuild_project" "cb_project" {
   dynamic "source" {
     for_each = local.source
     content {
-      type                  = lookup(source.value, "type")
-      buildspec             = lookup(source.value, "buildspec")
-      git_clone_depth       = lookup(source.value, "git_clone_depth")
-      git_submodules_config = lookup(source.value, "git_submodules_config")
-      insecure_ssl          = lookup(source.value, "insecure_ssl")
-      location              = lookup(source.value, "location")
-      report_build_status   = lookup(source.value, "report_build_status")
+      type                = lookup(source.value, "type")
+      buildspec           = lookup(source.value, "buildspec")
+      git_clone_depth     = lookup(source.value, "git_clone_depth")
+      insecure_ssl        = lookup(source.value, "insecure_ssl")
+      location            = lookup(source.value, "location")
+      report_build_status = lookup(source.value, "report_build_status")
 
       # Auth
       dynamic "auth" {
@@ -111,6 +110,14 @@ resource "aws_codebuild_project" "cb_project" {
         content {
           type     = auth.value.type
           resource = auth.value.resource
+        }
+      }
+
+      # Git Submodules Config
+      dynamic "git_submodules_config" {
+        for_each = [lookup(source.value, "git_submodules_config")]
+        content {
+          fetch_submodules = git_submodules_config.value.fetch_submodules
         }
       }
 
