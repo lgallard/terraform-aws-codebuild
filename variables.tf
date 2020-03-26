@@ -229,6 +229,12 @@ variable "source_report_build_status" {
 }
 
 
+variable "source_auth" {
+  description = "Information about the authorization settings for AWS CodeBuild to access the source code to be built."
+  type        = map
+  default     = null
+}
+
 variable "source_auth_type" {
   description = "The authorization type to use. The only valid value is OAUTH"
   type        = string
@@ -238,6 +244,12 @@ variable "source_auth_type" {
 variable "source_auth_resource" {
   description = "The resource value that applies to the specified authorization type."
   type        = string
+  default     = null
+}
+
+variable "source_git_submodules_config" {
+  description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
+  type        = map
   default     = null
 }
 
@@ -252,11 +264,6 @@ variable "source_git_submodules_config_fetch_submodules" {
 variable "name" {
   description = "The projects name."
   type        = string
-}
-
-variable "source" {
-  description = "Information about the project's input source code."
-  type        = map
 }
 
 variable "badge_enabled" {
