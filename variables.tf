@@ -185,6 +185,69 @@ variable "s3_logs_encryption_disabled" {
   default     = true
 }
 
+# Source
+variable "source" {
+  description = "Information about the project's input source code."
+  type        = map
+}
+
+variable "source_type" {
+  description = "The type of repository that contains the source code to be built. Valid values for this parameter are: `CODECOMMIT`, `CODEPIPELINE`, `GITHUB`, `GITHUB_ENTERPRISE`, `BITBUCKET`, `S3` or `NO_SOURCE`."
+  type        = string
+  default     = "GITHUB"
+}
+
+variable "source_buildspec" {
+  description = "The build spec declaration to use for this build project's related builds. This must be set when type is iNO_SOURCE`"
+  type        = string
+  default     = null
+}
+
+
+variable "source_git_clone_depth" {
+  description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
+  type        = number
+  default     = 1
+}
+
+variable "source_insecure_ssl" {
+  description = "Ignore SSL warnings when connecting to source control."
+  type        = bool
+  default     = false
+}
+
+variable "source_location" {
+  description = "The location of the source code from git or s3."
+  type        = string
+  default     = null
+}
+
+variable "source_report_build_status" {
+  description = "Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`."
+  type        = bool
+  default     = true
+}
+
+
+variable "source_auth_type" {
+  description = "The authorization type to use. The only valid value is OAUTH"
+  type        = string
+  default     = "OAUTH"
+}
+
+variable "source_auth_resource" {
+  description = "The resource value that applies to the specified authorization type."
+  type        = string
+  default     = null
+}
+
+variable "source_git_submodules_config_fetch_submodules" {
+  description = "If set to true, fetches Git submodules for the AWS CodeBuild build project."
+  type        = bool
+  default     = true
+}
+
+
 # General vars
 variable "name" {
   description = "The projects name."
