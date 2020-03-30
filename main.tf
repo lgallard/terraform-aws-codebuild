@@ -123,12 +123,23 @@ resource "aws_codebuild_project" "cb_project" {
 
     }
   }
+
+  # VPC Config
+  dynamic "vpc_config" {
+    for_each = local.vpc_config
+    content {
+      vpc_id             = lookup(vpc_config.value, "vpc_id")
+      subnets            = lookup(vpc_config.value, "subnets")
+      security_group_ids = lookup(vpc_config.value, "security_group_ids")
+    }
+  }
+
 }
 
 locals {
 
   # Artifacts
-  # If no artifacts block is provided, build an artifacts blokc using the default values
+  # If no artifacts block is provided, build one using the default values
   artifacts = [
     {
       type                   = lookup(var.artifacts, "type", null) == null ? var.artifacts_type : lookup(var.artifacts, "type")
@@ -144,7 +155,7 @@ locals {
   ]
 
   # Cache
-  # If no cache block is provided, build a cache block using the default values
+  # If no cache block is provided, build one using the default values
   cache = [
     {
       type     = lookup(var.cache, "type", null) == null ? var.cache_type : lookup(var.cache, "type")
@@ -154,7 +165,7 @@ locals {
   ]
 
   # Environmet
-  # If no enviroment block is provided, build an environment block using the default values
+  # If no enviroment block is provided, build one using the default values
   environment = [
     {
       computer_type               = lookup(var.environment, "computer_type", null) == null ? var.environment_computer_type : lookup(var.environment, "computer_type")
@@ -184,7 +195,7 @@ locals {
   }
 
   # Logs_config
-  # If no logs_config block is provided, build a logs_config block using the default values
+  # If no logs_config block is provided, build one using the default values
   logs_configs = ((local.cloudwatch_logs == null && local.s3_logs == null) || (length(local.cloudwatch_logs) == 0 && length(local.s3_logs) == 0)) == true ? [] : [
     {
       cloudwatch_logs = local.cloudwatch_logs
@@ -193,7 +204,7 @@ locals {
   ]
 
   # Source
-  # If no source block is provided, build a source block using the default values
+  # If no source block is provided, build one using the default values
   source = [
     {
       type                  = lookup(var.source, "type", null) == null ? var.source_type : lookup(var.source, "type")
@@ -206,5 +217,14 @@ locals {
       git_submodules_config = lookup(var.auth, "git_submodules_config", null) == null ? var.source_git_submodules_config : lookup(var.source, "git_submodules_config")
     }
   ]
-
+  #
+  # VPC Config
+  # If no VPC Config block is provided, build one using the default values
+  vpc_config = [
+    {
+      vpc_id             = lookup(var.vpc_config, "vpc_id", null) == null ? var.vpc_config_vpc_id : lookup(var.vpc_config, "vpc_id")
+      subnets            = lookup(var.vpc_config, "subnets", null) == null ? var.vpc_config_subnets : lookup(var.vpc_config, "subnets")
+      security_group_ids = lookup(var.vpc_config, "security_group_ids", null) == null ? var.vpc_config_security_group_ids : lookup(var.vpc_config, "security_group_ids")
+    }
+  ]
 }

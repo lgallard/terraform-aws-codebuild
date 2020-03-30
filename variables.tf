@@ -1,3 +1,56 @@
+# General vars
+variable "name" {
+  description = "The projects name."
+  type        = string
+}
+
+variable "badge_enabled" {
+  description = "Generates a publicly-accessible URL for the projects build badge. Available as badge_url attribute when enabled."
+  type        = bool
+  default     = false
+}
+
+variable "build_timeout" {
+  description = "How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed.The default is 60 minutes."
+  type        = number
+  default     = 60
+}
+
+variable "queued_timeout" {
+  description = "How long in minutes, from 5 to 480 (8 hours), a build is allowed to be queued before it times out.The default is 8 hours."
+  type        = number
+  default     = 480
+}
+
+variable "cache" {
+  description = "Information about the cache storage for the project."
+  type        = map
+}
+
+variable "description" {
+  description = "A short description of the project."
+  type        = string
+  default     = null
+}
+
+variable "encryption_key" {
+  description = "The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts."
+  type        = string
+  default     = null
+}
+
+variable "cloudwatch_logs" {
+  description = "Configuration for the builds to store log data to CloudWatch."
+  type        = map
+  default     = null
+}
+
+variable "s3_logs" {
+  description = "Configuration for the builds to store log data to S3."
+  type        = map
+  default     = null
+}
+
 # Artifacts
 variable "artifacts" {
   description = "Information about the project's build output artifacts."
@@ -203,7 +256,6 @@ variable "source_buildspec" {
   default     = null
 }
 
-
 variable "source_git_clone_depth" {
   description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
   type        = number
@@ -258,56 +310,27 @@ variable "source_git_submodules_config_fetch_submodules" {
   default     = true
 }
 
-
-# General vars
-variable "name" {
-  description = "The projects name."
-  type        = string
-}
-
-variable "badge_enabled" {
-  description = "Generates a publicly-accessible URL for the projects build badge. Available as badge_url attribute when enabled."
-  type        = bool
-  default     = false
-}
-
-variable "build_timeout" {
-  description = "How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed.The default is 60 minutes."
-  type        = number
-  default     = 60
-}
-
-variable "queued_timeout" {
-  description = "How long in minutes, from 5 to 480 (8 hours), a build is allowed to be queued before it times out.The default is 8 hours."
-  type        = number
-  default     = 480
-}
-
-variable "cache" {
-  description = "Information about the cache storage for the project."
+# VPC Config
+variable "vpc_config" {
+  description = "Configuration for the builds to run inside a VPC."
   type        = map
+  defaul      = null
 }
 
-variable "description" {
-  description = "A short description of the project."
+variable "vpc_config_vpc_id" {
+  description = "The ID of the VPC within which to run builds."
   type        = string
-  default     = null
+  defaul      = null
 }
 
-variable "encryption_key" {
-  description = "The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts."
+variable "subnets" {
+  description = "The subnet IDs within which to run builds."
   type        = string
-  default     = null
+  defaul      = null
 }
 
-variable "cloudwatch_logs" {
-  description = "Configuration for the builds to store log data to CloudWatch."
-  type        = map
-  default     = null
-}
-
-variable "s3_logs" {
-  description = "Configuration for the builds to store log data to S3."
-  type        = map
-  default     = null
+variable "security_group_ids" {
+  description = "The security group IDs to assign to running builds."
+  type        = string
+  defaul      = null
 }
