@@ -28,7 +28,6 @@ data "aws_iam_policy_document" "codebuild_assume_role_policy" {
     actions = [
       "sts:AssumeRole",
     ]
-
   }
 }
 
@@ -36,7 +35,6 @@ data "aws_iam_policy_document" "codebuild_assume_role_policy" {
 data "aws_iam_policy_document" "codebuild_role_extra_policies" {
   statement {
     effect = "Allow"
-
 
     actions = [
       "logs:CreateLogGroup",
@@ -52,7 +50,6 @@ data "aws_iam_policy_document" "codebuild_role_extra_policies" {
 
   statement {
     effect = "Allow"
-
 
     actions = [
       "s3:GetObject",
@@ -74,6 +71,7 @@ data "aws_iam_policy_document" "codebuild_role_extra_policies" {
     ]
     resources = ["*"]
   }
+
   statement {
     effect = "Allow"
     actions = [
