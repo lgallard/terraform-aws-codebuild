@@ -192,4 +192,19 @@ locals {
     }
   ]
 
+  # Source
+  # If no source block is provided, build a source block using the default values
+  source = [
+    {
+      type                  = lookup(var.source, "type", null) == null ? var.source_type : lookup(var.source, "type")
+      buildspec             = lookup(var.source, "buildspec", null) == null ? var.source_buildspec : lookup(var.source, "buildspec")
+      git_clone_depth       = lookup(var.source, "git_clone_depth", null) == null ? var.source_git_clone_depth : lookup(var.source, "git_clone_depth")
+      insecure_ssl          = lookup(var.source, "insecure_ssl", null) == null ? var.source_insecure_ssl : lookup(var.source, "insecure_ssl")
+      location              = lookup(var.source, "location", null) == null ? var.source_location : lookup(var.source, "location")
+      report_build_status   = lookup(var.source, "report_build_status", null) == null ? var.source_report_build_status : lookup(var.source, "report_build_status")
+      auth                  = lookup(var.auth, "auth", null) == null ? var.source_auth : lookup(var.source, "auth")
+      git_submodules_config = lookup(var.auth, "git_submodules_config", null) == null ? var.source_git_submodules_config : lookup(var.source, "git_submodules_config")
+    }
+  ]
+
 }

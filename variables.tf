@@ -228,7 +228,6 @@ variable "source_report_build_status" {
   default     = true
 }
 
-
 variable "source_auth" {
   description = "Information about the authorization settings for AWS CodeBuild to access the source code to be built."
   type        = map
