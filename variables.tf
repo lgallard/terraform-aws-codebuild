@@ -247,7 +247,7 @@ variable "source" {
 variable "source_type" {
   description = "The type of repository that contains the source code to be built. Valid values for this parameter are: `CODECOMMIT`, `CODEPIPELINE`, `GITHUB`, `GITHUB_ENTERPRISE`, `BITBUCKET`, `S3` or `NO_SOURCE`."
   type        = string
-  default     = "GITHUB"
+  default     = "CODEPIPELINE"
 }
 
 variable "source_buildspec" {

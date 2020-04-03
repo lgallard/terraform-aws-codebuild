@@ -1,3 +1,4 @@
+![Terraform](https://lgallardo.com/images/terraform.jpg)
 # terraform-aws-codebuild
 
 ## Usage
