@@ -40,18 +40,6 @@ variable "codebuild_source_version" {
   default     = null
 }
 
-variable "cloudwatch_logs" {
-  description = "Configuration for the builds to store log data to CloudWatch."
-  type        = map
-  default     = null
-}
-
-variable "s3_logs" {
-  description = "Configuration for the builds to store log data to S3."
-  type        = map
-  default     = null
-}
-
 # Artifacts
 variable "artifacts" {
   description = "Information about the project's build output artifacts."
