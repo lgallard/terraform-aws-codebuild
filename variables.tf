@@ -302,7 +302,7 @@ variable "codebuild_source_git_submodules_config_fetch_submodules" {
 # VPC Config
 variable "vpc_config" {
   description = "Configuration for the builds to run inside a VPC."
-  type        = map
+  type        = any
   default     = {}
 }
 
