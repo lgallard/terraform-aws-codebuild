@@ -41,13 +41,13 @@ resource "aws_codebuild_project" "cb_project" {
       compute_type                = lookup(environment.value, "compute_type")
       image                       = lookup(environment.value, "image")
       type                        = lookup(environment.value, "type")
-      image_pull_credentials_type = lookup(environment.value, "type")
+      image_pull_credentials_type = lookup(environment.value, "image_pull_credentials_type")
       privileged_mode             = lookup(environment.value, "privileged_mode")
       certificate                 = lookup(environment.value, "certificate")
 
       # Registry Credential
       dynamic "registry_credential" {
-        for_each = lookup(environment.value, "registry_credential")
+        for_each = length(lookup(environment.value, "registry_credential")) == 0 ? [] : [lookup(environment.value, "registry_credential")]
         content {
           credential          = registry_credential.value.credential
           credential_provider = registry_credential.value.credential_provider
@@ -56,7 +56,7 @@ resource "aws_codebuild_project" "cb_project" {
 
       # Environment variables
       dynamic "environment_variable" {
-        for_each = lookup(environment.value, "variables")
+        for_each = length(lookup(environment.value, "variables")) == 0 ? [] : lookup(environment.value, "variables")
         content {
           name  = environment_variable.value.name
           value = environment_variable.value.value
@@ -106,7 +106,7 @@ resource "aws_codebuild_project" "cb_project" {
 
       # Auth
       dynamic "auth" {
-        for_each = [lookup(source.value, "auth")]
+        for_each = length(lookup(source.value, "auth")) == 0 ? [] : [lookup(source.value, "auth")]
         content {
           type     = auth.value.type
           resource = auth.value.resource
@@ -115,7 +115,7 @@ resource "aws_codebuild_project" "cb_project" {
 
       # Git Submodules Config
       dynamic "git_submodules_config" {
-        for_each = [lookup(source.value, "git_submodules_config")]
+        for_each = length(lookup(source.value, "git_submodules_config")) == 0 ? [] : [lookup(source.value, "git_submodules_config")]
         content {
           fetch_submodules = git_submodules_config.value.fetch_submodules
         }
@@ -126,7 +126,7 @@ resource "aws_codebuild_project" "cb_project" {
 
   # VPC Config
   dynamic "vpc_config" {
-    for_each = local.vpc_config
+    for_each = lookup(local.vpc_config, "vpc_id") == null ? [] : [local.vpc_config]
     content {
       vpc_id             = lookup(vpc_config.value, "vpc_id")
       subnets            = lookup(vpc_config.value, "subnets")
@@ -175,7 +175,7 @@ locals {
       variables                   = lookup(var.environment, "variables", null) == null ? var.environment_variables : lookup(var.environment, "variables")
       privileged_mode             = lookup(var.environment, "privileged_mode", null) == null ? var.environment_privileged_mode : lookup(var.environment, "privileged_mode")
       certificate                 = lookup(var.environment, "certificate ", null) == null ? var.environment_certificate : lookup(var.environment, "certificate")
-      registry_credential         = lookup(var.environment, "registry_credential", null) == null ? [] : [lookup(var.environment, "registry_credential")]
+      registry_credential         = lookup(var.environment, "registry_credential", null) == null ? var.environment_registry_credential : lookup(var.environment, "registry_credential")
     }
   ]
 
@@ -220,11 +220,10 @@ locals {
 
   # VPC Config
   # If no VPC Config block is provided, build one using the default values
-  vpc_config = [
-    {
-      vpc_id             = lookup(var.vpc_config, "vpc_id", null) == null ? var.vpc_config_vpc_id : lookup(var.vpc_config, "vpc_id")
-      subnets            = lookup(var.vpc_config, "subnets", null) == null ? var.vpc_config_subnets : lookup(var.vpc_config, "subnets")
-      security_group_ids = lookup(var.vpc_config, "security_group_ids", null) == null ? var.vpc_config_security_group_ids : lookup(var.vpc_config, "security_group_ids")
-    }
-  ]
+  vpc_config = {
+    vpc_id             = lookup(var.vpc_config, "vpc_id", null) == null ? var.vpc_config_vpc_id : lookup(var.vpc_config, "vpc_id")
+    subnets            = lookup(var.vpc_config, "subnets", null) == null ? var.vpc_config_subnets : lookup(var.vpc_config, "subnets")
+    security_group_ids = lookup(var.vpc_config, "security_group_ids", null) == null ? var.vpc_config_security_group_ids : lookup(var.vpc_config, "security_group_ids")
+  }
+
 }

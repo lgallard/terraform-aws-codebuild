@@ -314,12 +314,12 @@ variable "vpc_config_vpc_id" {
 
 variable "vpc_config_subnets" {
   description = "The subnet IDs within which to run builds."
-  type        = string
-  default     = null
+  type        = list(string)
+  default     = []
 }
 
 variable "vpc_config_security_group_ids" {
   description = "The security group IDs to assign to running builds."
-  type        = string
-  default     = null
+  type        = list(string)
+  default     = []
 }
