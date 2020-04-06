@@ -44,7 +44,6 @@ resource "aws_codebuild_project" "cb_project" {
       image_pull_credentials_type = lookup(environment.value, "type")
       privileged_mode             = lookup(environment.value, "privileged_mode")
       certificate                 = lookup(environment.value, "certificate")
-      registry_credential         = lookup(environment.value, "registry_credential")
 
       # Registry Credential
       dynamic "registry_credential" {
