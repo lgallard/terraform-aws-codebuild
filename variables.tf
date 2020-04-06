@@ -191,13 +191,13 @@ variable "cloudwatch_logs_status" {
   default     = "ENABLED"
 }
 
-variable "group_name" {
+variable "cloudwatch_logs_group_name" {
   description = "The group name of the logs in CloudWatch Logs."
   type        = string
   default     = null
 }
 
-variable "stream_name" {
+variable "cloudwatch_logs_stream_name" {
   description = "The stream name of the logs in CloudWatch Logs."
   type        = string
   default     = null
@@ -312,13 +312,13 @@ variable "vpc_config_vpc_id" {
   default     = null
 }
 
-variable "subnets" {
+variable "vpc_config_subnets" {
   description = "The subnet IDs within which to run builds."
   type        = string
   default     = null
 }
 
-variable "security_group_ids" {
+variable "vpc_config_security_group_ids" {
   description = "The security group IDs to assign to running builds."
   type        = string
   default     = null
