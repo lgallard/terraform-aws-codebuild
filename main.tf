@@ -196,7 +196,7 @@ locals {
 
   # Logs_config
   # If no logs_config block is provided, build one using the default values
-  logs_configs = ((local.cloudwatch_logs == null && local.s3_logs == null) || (length(local.cloudwatch_logs) == 0 && length(local.s3_logs) == 0)) == true ? [] : [
+  logs_config = ((local.cloudwatch_logs == null && local.s3_logs == null) || (length(local.cloudwatch_logs) == 0 && length(local.s3_logs) == 0)) == true ? [] : [
     {
       cloudwatch_logs = local.cloudwatch_logs
       s3_logs         = local.s3_logs
