@@ -38,7 +38,7 @@ resource "aws_codebuild_project" "cb_project" {
   dynamic "environment" {
     for_each = local.environment
     content {
-      compuer_type                = lookup(environment.value, "computer_type")
+      compute_type                = lookup(environment.value, "compute_type")
       image                       = lookup(environment.value, "image")
       type                        = lookup(environment.value, "type")
       image_pull_credentials_type = lookup(environment.value, "type")
@@ -169,7 +169,7 @@ locals {
   # If no enviroment block is provided, build one using the default values
   environment = [
     {
-      computer_type               = lookup(var.environment, "computer_type", null) == null ? var.environment_computer_type : lookup(var.environment, "computer_type")
+      compute_type                = lookup(var.environment, "compute_type", null) == null ? var.environment_compute_type : lookup(var.environment, "compute_type")
       image                       = lookup(var.environment, "image", null) == null ? var.environment_image : lookup(var.environment, "image")
       type                        = lookup(var.environment, "type", null) == null ? var.environment_type : lookup(var.environment, "type")
       image_pull_credentials_type = lookup(var.environment, "image_pull_credentials_type", null) == null ? var.environment_image_pull_credentials_type : lookup(var.environment, "image_pull_credentials_type")
