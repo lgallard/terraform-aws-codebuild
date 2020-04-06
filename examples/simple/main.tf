@@ -50,6 +50,12 @@ module "myapp-project" {
     location = "${aws_s3_bucket.myapp-project.id}/build-log"
   }
 
+
+  tags = {
+    Environment = "dev"
+    owner       = "lgallard"
+  }
+
 }
 
 # S3
