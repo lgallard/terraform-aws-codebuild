@@ -303,23 +303,23 @@ variable "codebuild_source_git_submodules_config_fetch_submodules" {
 variable "vpc_config" {
   description = "Configuration for the builds to run inside a VPC."
   type        = map
-  defaul      = null
+  default     = null
 }
 
 variable "vpc_config_vpc_id" {
   description = "The ID of the VPC within which to run builds."
   type        = string
-  defaul      = null
+  default     = null
 }
 
 variable "subnets" {
   description = "The subnet IDs within which to run builds."
   type        = string
-  defaul      = null
+  default     = null
 }
 
 variable "security_group_ids" {
   description = "The security group IDs to assign to running builds."
   type        = string
-  defaul      = null
+  default     = null
 }
