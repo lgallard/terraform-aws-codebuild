@@ -56,7 +56,7 @@ resource "aws_codebuild_project" "cb_project" {
 
       # Environment variables
       dynamic "environment_variable" {
-        for_each = [lookup(environment.value, "variables")]
+        for_each = lookup(environment.value, "variables")
         content {
           name  = environment_variable.value.name
           value = environment_variable.value.value
