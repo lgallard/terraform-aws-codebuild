@@ -230,7 +230,7 @@ variable "s3_logs_encryption_disabled" {
 # Source
 variable "codebuild_source" {
   description = "Information about the project's input source code."
-  type        = map
+  type        = any
 }
 
 variable "codebuild_source_type" {
