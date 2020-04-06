@@ -191,7 +191,7 @@ locals {
   s3_logs = {
     status              = lookup(var.s3_logs, "status", null) == null ? var.s3_logs_status : lookup(var.s3_logs, "status")
     location            = lookup(var.s3_logs, "location", null) == null ? var.s3_logs_location : lookup(var.s3_logs, "location")
-    encryption_disabled = lookup(var.s3_logs, "encryption_disabled", null) == null ? var.s3_logs_status : lookup(var.s3_logs, "encryption_disabled")
+    encryption_disabled = lookup(var.s3_logs, "encryption_disabled", null) == null ? var.s3_logs_encryption_disabled : lookup(var.s3_logs, "encryption_disabled")
   }
 
   # Logs_config
