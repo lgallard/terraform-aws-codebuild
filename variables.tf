@@ -103,7 +103,7 @@ variable "artifacts_path" {
 # Cache
 variable "cache" {
   description = "Information about the cache storage for the project."
-  type        = map
+  type        = any
 }
 
 variable "cache_type" {
@@ -120,8 +120,8 @@ variable "cache_location" {
 
 variable "cache_modes" {
   description = "Specifies settings that AWS CodeBuild uses to store and reuse build dependencies. Valid values: `LOCAL_SOURCE_CACHE`, `LOCAL_DOCKER_LAYER_CACHE`, and `LOCAL_CUSTOM_CACHE`. (Required when cache type is `LOCAL`)"
-  type        = string
-  default     = null
+  type        = list
+  default     = []
 }
 
 # Environment
