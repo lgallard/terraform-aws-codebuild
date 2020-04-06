@@ -67,7 +67,7 @@ variable "artifacts_encryption_disabled" {
 variable "artifacts_override_artifact_name" {
   description = "If set to true, a name specified in the build spec file overrides the artifact name."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "artifacts_location" {
