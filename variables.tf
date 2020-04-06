@@ -175,14 +175,14 @@ variable "environment_certificate" {
 variable "environment_registry_credential" {
   description = "Information about credentials for access to a private Docker registry. Registry Credential config blocks are documented below."
   type        = map
-  default     = null
+  default     = {}
 }
 
 # Logs
 variable "cloudwatch_logs" {
   description = "Configuration for the builds to store log data to CloudWatch."
   type        = map
-  default     = null
+  default     = {}
 }
 
 variable "cloudwatch_logs_status" {
@@ -206,7 +206,7 @@ variable "cloudwatch_logs_stream_name" {
 variable "s3_logs" {
   description = "Configuration for the builds to store log data to S3."
   type        = map
-  default     = null
+  default     = {}
 }
 
 variable "s3_logs_status" {
@@ -272,7 +272,7 @@ variable "codebuild_source_report_build_status" {
 variable "codebuild_source_auth" {
   description = "Information about the authorization settings for AWS CodeBuild to access the source code to be built."
   type        = map
-  default     = null
+  default     = {}
 }
 
 variable "codebuild_source_auth_type" {
@@ -290,7 +290,7 @@ variable "codebuild_source_auth_resource" {
 variable "codebuild_source_git_submodules_config" {
   description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
   type        = map
-  default     = null
+  default     = {}
 }
 
 variable "codebuild_source_git_submodules_config_fetch_submodules" {
@@ -303,7 +303,7 @@ variable "codebuild_source_git_submodules_config_fetch_submodules" {
 variable "vpc_config" {
   description = "Configuration for the builds to run inside a VPC."
   type        = map
-  default     = null
+  default     = {}
 }
 
 variable "vpc_config_vpc_id" {
