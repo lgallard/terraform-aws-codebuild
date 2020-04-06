@@ -47,7 +47,7 @@ resource "aws_codebuild_project" "cb_project" {
 
       # Registry Credential
       dynamic "registry_credential" {
-        for_each = [lookup(environment.value, "registry_credential")]
+        for_each = lookup(environment.value, "registry_credential")
         content {
           credential          = registry_credential.value.credential
           credential_provider = registry_credential.value.credential_provider
@@ -175,7 +175,7 @@ locals {
       variables                   = lookup(var.environment, "variables", null) == null ? var.environment_variables : lookup(var.environment, "variables")
       privileged_mode             = lookup(var.environment, "privileged_mode", null) == null ? var.environment_privileged_mode : lookup(var.environment, "privileged_mode")
       certificate                 = lookup(var.environment, "certificate ", null) == null ? var.environment_certificate : lookup(var.environment, "certificate")
-      registry_credential         = lookup(var.environment, "registry_credential", null) == null ? var.environment_registry_credential : lookup(var.environment, "registry_credential")
+      registry_credential         = lookup(var.environment, "registry_credential", null) == null ? [] : [lookup(var.environment, "registry_credential")]
     }
   ]
 
