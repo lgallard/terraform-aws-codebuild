@@ -5,6 +5,7 @@ resource "aws_codebuild_project" "cb_project" {
   description    = var.description
   encryption_key = var.encryption_key
   service_role   = aws_iam_role.service_role.arn
+  source_version = var.codebuild_source_version
   queued_timeout = var.queued_timeout
 
   # Artifacts
@@ -207,17 +208,17 @@ locals {
   # If no source block is provided, build one using the default values
   source = [
     {
-      type                  = lookup(var.source, "type", null) == null ? var.source_type : lookup(var.source, "type")
-      buildspec             = lookup(var.source, "buildspec", null) == null ? var.source_buildspec : lookup(var.source, "buildspec")
-      git_clone_depth       = lookup(var.source, "git_clone_depth", null) == null ? var.source_git_clone_depth : lookup(var.source, "git_clone_depth")
-      insecure_ssl          = lookup(var.source, "insecure_ssl", null) == null ? var.source_insecure_ssl : lookup(var.source, "insecure_ssl")
-      location              = lookup(var.source, "location", null) == null ? var.source_location : lookup(var.source, "location")
-      report_build_status   = lookup(var.source, "report_build_status", null) == null ? var.source_report_build_status : lookup(var.source, "report_build_status")
-      auth                  = lookup(var.auth, "auth", null) == null ? var.source_auth : lookup(var.source, "auth")
-      git_submodules_config = lookup(var.auth, "git_submodules_config", null) == null ? var.source_git_submodules_config : lookup(var.source, "git_submodules_config")
+      type                  = lookup(var.codebuild_source, "type", null) == null ? var.codebuild_source_type : lookup(var.codebuild_source, "type")
+      buildspec             = lookup(var.codebuild_source, "buildspec", null) == null ? var.codebuild_source_buildspec : lookup(var.codebuild_source, "buildspec")
+      git_clone_depth       = lookup(var.codebuild_source, "git_clone_depth", null) == null ? var.codebuild_source_git_clone_depth : lookup(var.codebuild_source, "git_clone_depth")
+      insecure_ssl          = lookup(var.codebuild_source, "insecure_ssl", null) == null ? var.codebuild_source_insecure_ssl : lookup(var.codebuild_source, "insecure_ssl")
+      location              = lookup(var.codebuild_source, "location", null) == null ? var.codebuild_source_location : lookup(var.codebuild_source, "location")
+      report_build_status   = lookup(var.codebuild_source, "report_build_status", null) == null ? var.codebuild_source_report_build_status : lookup(var.codebuild_source, "report_build_status")
+      auth                  = lookup(var.codebuild_source, "auth", null) == null ? var.codebuild_source_auth : lookup(var.codebuild_source, "auth")
+      git_submodules_config = lookup(var.codebuild_source, "git_submodules_config", null) == null ? var.codebuild_source_git_submodules_config : lookup(var.codebuild_source, "git_submodules_config")
     }
   ]
-  #
+
   # VPC Config
   # If no VPC Config block is provided, build one using the default values
   vpc_config = [

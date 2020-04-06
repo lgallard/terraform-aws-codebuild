@@ -22,11 +22,6 @@ variable "queued_timeout" {
   default     = 480
 }
 
-variable "cache" {
-  description = "Information about the cache storage for the project."
-  type        = map
-}
-
 variable "description" {
   description = "A short description of the project."
   type        = string
@@ -35,6 +30,12 @@ variable "description" {
 
 variable "encryption_key" {
   description = "The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project's build output artifacts."
+  type        = string
+  default     = null
+}
+
+variable "codebuild_source_version" {
+  description = "A version of the build input to be built for this project. If not specified, the latest version is used."
   type        = string
   default     = null
 }
@@ -239,72 +240,72 @@ variable "s3_logs_encryption_disabled" {
 }
 
 # Source
-variable "source" {
+variable "codebuild_source" {
   description = "Information about the project's input source code."
   type        = map
 }
 
-variable "source_type" {
+variable "codebuild_source_type" {
   description = "The type of repository that contains the source code to be built. Valid values for this parameter are: `CODECOMMIT`, `CODEPIPELINE`, `GITHUB`, `GITHUB_ENTERPRISE`, `BITBUCKET`, `S3` or `NO_SOURCE`."
   type        = string
   default     = "CODEPIPELINE"
 }
 
-variable "source_buildspec" {
+variable "codebuild_source_buildspec" {
   description = "The build spec declaration to use for this build project's related builds. This must be set when type is iNO_SOURCE`"
   type        = string
   default     = null
 }
 
-variable "source_git_clone_depth" {
+variable "codebuild_source_git_clone_depth" {
   description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
   type        = number
   default     = 1
 }
 
-variable "source_insecure_ssl" {
+variable "codebuild_source_insecure_ssl" {
   description = "Ignore SSL warnings when connecting to source control."
   type        = bool
   default     = false
 }
 
-variable "source_location" {
+variable "codebuild_source_location" {
   description = "The location of the source code from git or s3."
   type        = string
   default     = null
 }
 
-variable "source_report_build_status" {
+variable "codebuild_source_report_build_status" {
   description = "Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`."
   type        = bool
   default     = true
 }
 
-variable "source_auth" {
+variable "codebuild_source_auth" {
   description = "Information about the authorization settings for AWS CodeBuild to access the source code to be built."
   type        = map
   default     = null
 }
 
-variable "source_auth_type" {
+variable "codebuild_source_auth_type" {
   description = "The authorization type to use. The only valid value is OAUTH"
   type        = string
   default     = "OAUTH"
 }
 
-variable "source_auth_resource" {
+variable "codebuild_source_auth_resource" {
   description = "The resource value that applies to the specified authorization type."
   type        = string
   default     = null
 }
 
-variable "source_git_submodules_config" {
+variable "codebuild_source_git_submodules_config" {
   description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
   type        = map
   default     = null
 }
 
-variable "source_git_submodules_config_fetch_submodules" {
+variable "codebuild_source_git_submodules_config_fetch_submodules" {
   description = "If set to true, fetches Git submodules for the AWS CodeBuild build project."
   type        = bool
   default     = true
