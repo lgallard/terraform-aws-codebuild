@@ -86,7 +86,7 @@ resource "aws_codebuild_project" "cb_project" {
         content {
           status              = s3_logs.value.status
           location            = s3_logs.value.location
-          encryption_disabled = s3_logs.valuei.encryption_disabled
+          encryption_disabled = s3_logs.value.encryption_disabled
         }
       }
 
