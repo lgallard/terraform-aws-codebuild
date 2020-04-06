@@ -127,7 +127,7 @@ variable "cache_modes" {
 # Environment
 variable "environment" {
   description = "Information about the project's build environment."
-  type        = map
+  type        = any
 }
 
 variable "environment_computer_type" {
