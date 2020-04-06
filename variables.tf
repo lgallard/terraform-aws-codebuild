@@ -323,3 +323,10 @@ variable "vpc_config_security_group_ids" {
   type        = list(string)
   default     = []
 }
+
+# Tags
+variable "tags" {
+  description = "A mapping of tags to assign to the resource."
+  type        = map(string)
+  default     = {}
+}

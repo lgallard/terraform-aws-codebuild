@@ -134,6 +134,9 @@ resource "aws_codebuild_project" "cb_project" {
     }
   }
 
+  # Tags
+  tags = var.tags
+
 }
 
 locals {
