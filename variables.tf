@@ -133,7 +133,7 @@ variable "cache_location" {
 variable "cache_modes" {
   description = "Specifies settings that AWS CodeBuild uses to store and reuse build dependencies. Valid values: `LOCAL_SOURCE_CACHE`, `LOCAL_DOCKER_LAYER_CACHE`, and `LOCAL_CUSTOM_CACHE`. (Required when cache type is `LOCAL`)"
   type        = string
-  default     = []
+  default     = null
 }
 
 # Environment
