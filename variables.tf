@@ -43,7 +43,8 @@ variable "codebuild_source_version" {
 # Artifacts
 variable "artifacts" {
   description = "Information about the project's build output artifacts."
-  type        = map
+  type        = any
+  default     = {}
 }
 
 variable "artifacts_type" {
@@ -104,6 +105,7 @@ variable "artifacts_path" {
 variable "cache" {
   description = "Information about the cache storage for the project."
   type        = any
+  default     = {}
 }
 
 variable "cache_type" {
@@ -128,6 +130,7 @@ variable "cache_modes" {
 variable "environment" {
   description = "Information about the project's build environment."
   type        = any
+  default     = {}
 }
 
 variable "environment_compute_type" {
@@ -181,7 +184,7 @@ variable "environment_registry_credential" {
 # Logs
 variable "cloudwatch_logs" {
   description = "Configuration for the builds to store log data to CloudWatch."
-  type        = map
+  type        = any
   default     = {}
 }
 
@@ -205,7 +208,7 @@ variable "cloudwatch_logs_stream_name" {
 
 variable "s3_logs" {
   description = "Configuration for the builds to store log data to S3."
-  type        = map
+  type        = any
   default     = {}
 }
 
@@ -231,6 +234,7 @@ variable "s3_logs_encryption_disabled" {
 variable "codebuild_source" {
   description = "Information about the project's input source code."
   type        = any
+  default     = {}
 }
 
 variable "codebuild_source_type" {

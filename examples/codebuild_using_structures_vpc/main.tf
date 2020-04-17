@@ -1,6 +1,7 @@
 # CodeBuild
 module "myapp-project" {
-  source = "../terraform-aws-codebuild"
+
+  source = "git::https://github.com/lgallard/terraform-aws-codebuild.git"
 
   name        = "my-app"
   description = "Codebuild for deploying myapp"
@@ -8,7 +9,7 @@ module "myapp-project" {
   codebuild_source_version = "master"
   codebuild_source = {
     type            = "GITHUB"
-    location        = "https://github.com/mitchellh/packer.git"
+    location        = "https://github.com/lgallard/codebuild-example.git"
     git_clone_depth = 1
 
     git_submodules_config = {
@@ -25,18 +26,21 @@ module "myapp-project" {
     # Environment variables
     variables = [
       {
-        name  = "KEY1"
-        value = "VALUE1"
+        name  = "REGISTRY_URL"
+        value = "012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr"
       },
       {
-        name  = "KEY2"
-        value = "VALUE2"
+        name  = "AWS_DEFAULT_REGION"
+        value = "us-east-1"
       },
     ]
   }
 
   artifacts = {
-    type = "NO_ARTIFACTS"
+    location  = aws_s3_bucket.myapp-project.bucket
+    type      = "S3"
+    path      = "/"
+    packaging = "ZIP"
   }
 
   cache = {
@@ -51,9 +55,18 @@ module "myapp-project" {
   }
 
 
+  # VPC
+  vpc_config = {
+    vpc_id             = "vpc-123446789101"
+    subnets            = ["subnet-7a1dc5a54444", "subnet-6b4a45b64444"]
+    security_group_ids = ["sg-b475b46c4444", "sg-58b61a4c4444"]
+
+  }
+
+  # Tags
   tags = {
     Environment = "dev"
-    owner       = "lgallard"
+    owner       = "development-team"
   }
 
 }
