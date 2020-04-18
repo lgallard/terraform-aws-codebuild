@@ -3,9 +3,9 @@
 Terraform module for creating [AWS CodeBuild](https://aws.amazon.com/codebuild/) Projects. AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.
 
 ## Usage
-You can  define CodeBuild projects using object variables (made of maps, list, boolean, ect), or you can define projects using the clasic module's variables approach (eg. `artifacts_*`, `cache_*`, etc.).
+You can  define CodeBuild projects using object variables (made of maps, lists, booleans, etc.), or you can define projects using the classic module's variables approach (eg. `artifacts_*`, `cache_*`, etc.).
 
-In the [examples](examples/) folder you can check both approached in detail and another example with VPC support.
+In the [examples](examples/) folder you can check both approaches in detail and another example with VPC support.
 
 
 ## Example using objects
