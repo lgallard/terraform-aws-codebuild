@@ -2,7 +2,7 @@
 
 FIXES:
 
-  * Change default values for sourcea block
+  * Change default values for source block
 
 ## 0.2.0 (May 28, 2020)
 
