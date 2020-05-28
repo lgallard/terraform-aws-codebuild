@@ -252,7 +252,7 @@ variable "codebuild_source_buildspec" {
 variable "codebuild_source_git_clone_depth" {
   description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
   type        = number
-  default     = 1
+  default     = 0
 }
 
 variable "codebuild_source_insecure_ssl" {
@@ -270,7 +270,7 @@ variable "codebuild_source_location" {
 variable "codebuild_source_report_build_status" {
   description = "Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "codebuild_source_auth" {

@@ -172,12 +172,12 @@ module "myapp-project" {
 | codebuild\_source\_auth\_resource | The resource value that applies to the specified authorization type. | `string` | n/a | yes |
 | codebuild\_source\_auth\_type | The authorization type to use. The only valid value is OAUTH | `string` | `"OAUTH"` | no |
 | codebuild\_source\_buildspec | The build spec declaration to use for this build project's related builds. This must be set when type is iNO\_SOURCE | `string` | n/a | yes |
-| codebuild\_source\_git\_clone\_depth | Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`. | `number` | `1` | no |
+| codebuild\_source\_git\_clone\_depth | Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`. | `number` | `0` | no |
 | codebuild\_source\_git\_submodules\_config | Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`. | `map` | `{}` | no |
 | codebuild\_source\_git\_submodules\_config\_fetch\_submodules | If set to true, fetches Git submodules for the AWS CodeBuild build project. | `bool` | `true` | no |
 | codebuild\_source\_insecure\_ssl | Ignore SSL warnings when connecting to source control. | `bool` | `false` | no |
 | codebuild\_source\_location | The location of the source code from git or s3. | `string` | n/a | yes |
-| codebuild\_source\_report\_build\_status | Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`. | `bool` | `true` | no |
+| codebuild\_source\_report\_build\_status | Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`. | `bool` | `false` | no |
 | codebuild\_source\_type | The type of repository that contains the source code to be built. Valid values for this parameter are: `CODECOMMIT`, `CODEPIPELINE`, `GITHUB`, `GITHUB_ENTERPRISE`, `BITBUCKET`, `S3` or `NO_SOURCE`. | `string` | `"CODEPIPELINE"` | no |
 | codebuild\_source\_version | A version of the build input to be built for this project. If not specified, the latest version is used. | `string` | n/a | yes |
 | description | A short description of the project. | `string` | n/a | yes |
