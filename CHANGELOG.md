@@ -1,3 +1,9 @@
+## 0.2.1 (May 28, 2020)
+
+FIXES:
+
+  * Change default values for sourcea block
+
 ## 0.2.0 (May 28, 2020)
 
 FIXES:
