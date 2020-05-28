@@ -2,7 +2,7 @@
 
 FIXES:
 
-  * Change default artifacts type to `CODEPIPELINE`"
+  * Change default artifacts type to `CODEPIPELINE`
 
 ## 0.1.1 (April 17, 2020)
 
