@@ -50,7 +50,7 @@ variable "artifacts" {
 variable "artifacts_type" {
   description = "The build output artifact's type. Valid values for this parameter are: `CODEPIPELINE`, `NO_ARTIFACTS` or `S3`."
   type        = string
-  default     = "NO_ARTIFACTS"
+  default     = "CODEPIPELINE"
 }
 
 variable "artifacts_artifact_identifier" {

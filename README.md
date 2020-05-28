@@ -137,6 +137,12 @@ module "myapp-project" {
 }
 ```
 
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -150,7 +156,7 @@ module "myapp-project" {
 | artifacts\_override\_artifact\_name | If set to true, a name specified in the build spec file overrides the artifact name. | `bool` | `false` | no |
 | artifacts\_packaging | The type of build output artifact to create. If `type` is set to `S3`, valid values for this parameter are: `NONE` or `ZIP` | `string` | n/a | yes |
 | artifacts\_path | If `type` is set to `S3`, this is the path to the output artifact | `string` | `""` | no |
-| artifacts\_type | The build output artifact's type. Valid values for this parameter are: `CODEPIPELINE`, `NO_ARTIFACTS` or `S3`. | `string` | `"NO_ARTIFACTS"` | no |
+| artifacts\_type | The build output artifact's type. Valid values for this parameter are: `CODEPIPELINE`, `NO_ARTIFACTS` or `S3`. | `string` | `"CODEPIPELINE"` | no |
 | badge\_enabled | Generates a publicly-accessible URL for the projects build badge. Available as badge\_url attribute when enabled. | `bool` | `false` | no |
 | build\_timeout | How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed.The default is 60 minutes. | `number` | `60` | no |
 | cache | Information about the cache storage for the project. | `any` | `{}` | no |
