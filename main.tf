@@ -60,6 +60,7 @@ resource "aws_codebuild_project" "cb_project" {
         content {
           name  = environment_variable.value.name
           value = environment_variable.value.value
+          type  = lookup(environment_variable.value, "type", null) == null ?  "PLAINTEXT" : environment_variable.value.type
         }
       }
     }
@@ -167,8 +168,8 @@ locals {
     }
   ]
 
-  # Environmet
-  # If no enviroment block is provided, build one using the default values
+  # Environment
+  # If no environment block is provided, build one using the default values
   environment = [
     {
       compute_type                = lookup(var.environment, "compute_type", null) == null ? var.environment_compute_type : lookup(var.environment, "compute_type")
