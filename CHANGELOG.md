@@ -1,3 +1,11 @@
+## 0.3.0 (Feb 24, 2021)
+
+FEATURES:
+
+* Added type lookup to environment variables
+
+Thanks @brettminnie
+
 ## 0.2.1 (May 28, 2020)
 
 FIXES:
