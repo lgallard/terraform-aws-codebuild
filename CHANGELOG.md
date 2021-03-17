@@ -1,8 +1,15 @@
+## 0.4.0 (March 17, 2021)
+
+FEATURES:
+
+  * Add secondary sources (thanks @brettminnie)
+
+
 ## 0.3.0 (Feb 24, 2021)
 
 FEATURES:
 
-* Added type lookup to environment variables
+  * Added type lookup to environment variables
 
 Thanks @brettminnie
 
