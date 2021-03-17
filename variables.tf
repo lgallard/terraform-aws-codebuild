@@ -303,6 +303,85 @@ variable "codebuild_source_git_submodules_config_fetch_submodules" {
   default     = true
 }
 
+# Secondary Source
+variable "codebuild_secondary_source" {
+  description = "Information about the project's secondary source code."
+  type        = any
+  default     = {}
+}
+
+variable "codebuild_secondary_source_type" {
+  description = "The type of repository that contains the secondary source code to be built. Valid values for this parameter are: `CODECOMMIT`, `CODEPIPELINE`, `GITHUB`, `GITHUB_ENTERPRISE`, `BITBUCKET`, `S3` or `NO_SOURCE`."
+  type        = string
+  default     = "CODEPIPELINE"
+}
+
+variable "codebuild_secondary_source_buildspec" {
+  description = "The build spec declaration to use for this build project's related builds. Optional"
+  type        = string
+  default     = null
+}
+
+variable "codebuild_secondary_source_git_clone_depth" {
+  description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
+  type        = number
+  default     = 0
+}
+
+variable "codebuild_secondary_source_insecure_ssl" {
+  description = "Ignore SSL warnings when connecting to source control."
+  type        = bool
+  default     = false
+}
+
+variable "codebuild_secondary_source_location" {
+  description = "The location of the source code from git or s3."
+  type        = string
+  default     = null
+}
+
+variable "codebuild_secondary_source_report_build_status" {
+  description = "Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`."
+  type        = bool
+  default     = false
+}
+
+variable "codebuild_secondary_source_auth" {
+  description = "Information about the authorization settings for AWS CodeBuild to access the source code to be built."
+  type        = map
+  default     = {}
+}
+
+variable "codebuild_secondary_source_auth_type" {
+  description = "The authorization type to use. The only valid value is OAUTH"
+  type        = string
+  default     = "OAUTH"
+}
+
+variable "codebuild_secondary_source_auth_resource" {
+  description = "The resource value that applies to the specified authorization type."
+  type        = string
+  default     = null
+}
+
+variable "codebuild_secondary_source_git_submodules_config" {
+  description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
+  type        = map
+  default     = {}
+}
+
+variable "codebuild_secondary_source_identifier" {
+  description = "The name of a folder named that the source will be checked out into inside the AWS CodeBuild source directory"
+  type        = string
+  default     = null
+}
+
+variable "codebuild_secondary_source_git_submodules_config_fetch_submodules" {
+  description = "If set to true, fetches Git submodules for the AWS CodeBuild build project."
+  type        = bool
+  default     = true
+}
+
 # VPC Config
 variable "vpc_config" {
   description = "Configuration for the builds to run inside a VPC."
