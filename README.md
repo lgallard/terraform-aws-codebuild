@@ -147,6 +147,21 @@ No requirements.
 |------|---------|
 | aws | n/a |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) |
+| [aws_codebuild_project](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codebuild_project) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) |
+| [aws_region](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -171,6 +186,19 @@ No requirements.
 | cloudwatch\_logs\_group\_name | The group name of the logs in CloudWatch Logs. | `string` | `null` | no |
 | cloudwatch\_logs\_status | Current status of logs in CloudWatch Logs for a build project. Valid values: `ENABLED`, `DISABLED.` | `string` | `"ENABLED"` | no |
 | cloudwatch\_logs\_stream\_name | The stream name of the logs in CloudWatch Logs. | `string` | `null` | no |
+| codebuild\_secondary\_source | Information about the project's secondary source code. | `any` | `{}` | no |
+| codebuild\_secondary\_source\_auth | Information about the authorization settings for AWS CodeBuild to access the source code to be built. | `map` | `{}` | no |
+| codebuild\_secondary\_source\_auth\_resource | The resource value that applies to the specified authorization type. | `string` | `null` | no |
+| codebuild\_secondary\_source\_auth\_type | The authorization type to use. The only valid value is OAUTH | `string` | `"OAUTH"` | no |
+| codebuild\_secondary\_source\_buildspec | The build spec declaration to use for this build project's related builds. Optional | `string` | `null` | no |
+| codebuild\_secondary\_source\_git\_clone\_depth | Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`. | `number` | `0` | no |
+| codebuild\_secondary\_source\_git\_submodules\_config | Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`. | `map` | `{}` | no |
+| codebuild\_secondary\_source\_git\_submodules\_config\_fetch\_submodules | If set to true, fetches Git submodules for the AWS CodeBuild build project. | `bool` | `true` | no |
+| codebuild\_secondary\_source\_identifier | The name of a folder named that the source will be checked out into inside the AWS CodeBuild source directory | `string` | `null` | no |
+| codebuild\_secondary\_source\_insecure\_ssl | Ignore SSL warnings when connecting to source control. | `bool` | `false` | no |
+| codebuild\_secondary\_source\_location | The location of the source code from git or s3. | `string` | `null` | no |
+| codebuild\_secondary\_source\_report\_build\_status | Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`. | `bool` | `false` | no |
+| codebuild\_secondary\_source\_type | The type of repository that contains the secondary source code to be built. Valid values for this parameter are: `CODECOMMIT`, `CODEPIPELINE`, `GITHUB`, `GITHUB_ENTERPRISE`, `BITBUCKET`, `S3` or `NO_SOURCE`. | `string` | `"CODEPIPELINE"` | no |
 | codebuild\_source | Information about the project's input source code. | `any` | `{}` | no |
 | codebuild\_source\_auth | Information about the authorization settings for AWS CodeBuild to access the source code to be built. | `map` | `{}` | no |
 | codebuild\_source\_auth\_resource | The resource value that applies to the specified authorization type. | `string` | `null` | no |
