@@ -122,7 +122,7 @@ variable "cache_location" {
 
 variable "cache_modes" {
   description = "Specifies settings that AWS CodeBuild uses to store and reuse build dependencies. Valid values: `LOCAL_SOURCE_CACHE`, `LOCAL_DOCKER_LAYER_CACHE`, and `LOCAL_CUSTOM_CACHE`. (Required when cache type is `LOCAL`)"
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -159,7 +159,7 @@ variable "environment_image_pull_credentials_type" {
 
 variable "environment_variables" {
   description = "A list of sets of environment variables to make available to builds for this build project."
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -177,7 +177,7 @@ variable "environment_certificate" {
 
 variable "environment_registry_credential" {
   description = "Information about credentials for access to a private Docker registry. Registry Credential config blocks are documented below."
-  type        = map
+  type        = map(any)
   default     = {}
 }
 
@@ -275,7 +275,7 @@ variable "codebuild_source_report_build_status" {
 
 variable "codebuild_source_auth" {
   description = "Information about the authorization settings for AWS CodeBuild to access the source code to be built."
-  type        = map
+  type        = map(any)
   default     = {}
 }
 
@@ -293,7 +293,7 @@ variable "codebuild_source_auth_resource" {
 
 variable "codebuild_source_git_submodules_config" {
   description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
-  type        = map
+  type        = map(any)
   default     = {}
 }
 
@@ -304,10 +304,33 @@ variable "codebuild_source_git_submodules_config_fetch_submodules" {
 }
 
 # Secondary Source
-variable "codebuild_secondary_source" {
-  description = "Information about the project's secondary source code."
+variable "codebuild_secondary_sources" {
+  description = <<-EOF
+    Information about the project's secondary sources code. See the related codebuild source objects for descriptions of each parameter.
+    The parameter `source_identifier` is the name of the directory to clone the secondary source into as a sibling to the primary source code directory.
+    If this variable is omitted, no secondary sources are created.
+
+    eg:
+    ```
+    codebuild_secondary_sources = [
+      {
+        type              = "GITHUB"
+        location          = "https://github.com/myprofile/myproject-1.git"
+        source_identifier = "my_awesome_project1"
+      },
+      {
+        type                = "GITHUB"
+        location            = "https://github.com/myprofile/myproject-2.git"
+        git_clone_depth     = 1
+        source_identifier   = "my_awesome_project2"
+        report_build_status = true
+        insecure_ssl        = true
+      }
+    ]
+  ```
+  EOF
   type        = any
-  default     = {}
+  default     = []
 }
 
 variable "codebuild_secondary_source_type" {
