@@ -1,7 +1,7 @@
 # CodeBuild
-module "myapp-project" {
+module "myapp-project-var" {
 
-  source = "git::https://github.com/lgallard/terraform-aws-codebuild.git"
+  source = "lgallard/codebuild/aws"
 
   name        = "my-app-var"
   description = "Codebuild for deploying myapp (variables)"
@@ -24,11 +24,11 @@ module "myapp-project" {
   environment_variables = [
     {
       name  = "REGISTRY_URL"
-      value = "012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr"
+      value = "012345678910.dkr.ecr.us-west-1.amazonaws.com/my-ecr"
     },
     {
       name  = "AWS_DEFAULT_REGION"
-      value = "us-east-1"
+      value = "us-west-1"
     },
   ]
 

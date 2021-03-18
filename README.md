@@ -29,6 +29,23 @@ module "myapp-project" {
     }
   }
 
+  # Secondary Sources (optional)
+  codebuild_secondary_sources = [
+    {
+      type              = "GITHUB"
+      location          = "https://github.com/myprofile/myproject-1.git"
+      source_identifier = "my_awesome_project1"
+    },
+    {
+      type                = "GITHUB"
+      location            = "https://github.com/myprofile/myproject-2.git"
+      git_clone_depth     = 1
+      source_identifier   = "my_awesome_project2"
+      report_build_status = true
+      insecure_ssl        = true
+    }
+  ]
+
   # Environment
   environment = {
     compute_type    = "BUILD_GENERAL1_SMALL"
