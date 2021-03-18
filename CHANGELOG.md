@@ -1,3 +1,10 @@
+## 0.5.0 (March 18, 2021)
+
+FEATURES:
+
+  * Add secondary sources (based on @brettminnie's)
+  * Update example with secondary sources
+
 ## 0.4.0 (March 17, 2021)
 
 FEATURES:

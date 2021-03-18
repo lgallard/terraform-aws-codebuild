@@ -22,12 +22,12 @@ module "myapp-project" {
   codebuild_secondary_sources = [
     {
       type              = "GITHUB"
-      location          = "https://github.com/myprofile/myproject.git"
+      location          = "https://github.com/myprofile/myproject-1.git"
       source_identifier = "my_awesome_project1"
     },
     {
       type                = "GITHUB"
-      location            = "https://github.com/myprofile/myproject2.git"
+      location            = "https://github.com/myprofile/myproject-2.git"
       git_clone_depth     = 1
       source_identifier   = "my_awesome_project2"
       report_build_status = true

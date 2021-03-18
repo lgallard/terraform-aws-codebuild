@@ -136,8 +136,6 @@ module "myapp-project" {
 
 }
 ```
-
-
 ## Requirements
 
 No requirements.
@@ -187,7 +185,19 @@ No Modules.
 | cloudwatch\_logs\_group\_name | The group name of the logs in CloudWatch Logs. | `string` | `null` | no |
 | cloudwatch\_logs\_status | Current status of logs in CloudWatch Logs for a build project. Valid values: `ENABLED`, `DISABLED.` | `string` | `"ENABLED"` | no |
 | cloudwatch\_logs\_stream\_name | The stream name of the logs in CloudWatch Logs. | `string` | `null` | no |
-| codebuild\_secondary\_sources | Information about the project's secondary sources code. See the related codebuild source objects for descriptions of each parameter.<br>  The parameter `source_identifier` is the name of the directory to clone the secondary source into as a sibling to the primary source code directory. If this variable is omitted, no secondary sources are created.<br><br>  eg:<pre>codebuild_secondary_sources = [<br>  {<br>    type                = "GITHUB"<br>    location            = "https://github.com/myprofile/myproject.git"<br>    git_clone_depth     = 1<br>    source_identifier   = "my_awesome_project"<br>    report_build_status = false<br>    insecure_ssl        = false<br>    buildspec           = null<br><br>    git_submodules_config = {}<br>    auth = {}<br>  }<br>]</pre> | <pre>list(object(<br>    {<br>      type                  = string<br>      buildspec             = string<br>      git_clone_depth       = number<br>      insecure_ssl          = bool<br>      location              = string<br>      report_build_status   = string<br>      source_identifier     = string<br>      auth                  = any<br>      git_submodules_config = any<br>    }<br>  ))</pre> | `[]` | no |
+| codebuild\_secondary\_source\_auth | Information about the authorization settings for AWS CodeBuild to access the source code to be built. | `map` | `{}` | no |
+| codebuild\_secondary\_source\_auth\_resource | The resource value that applies to the specified authorization type. | `string` | `null` | no |
+| codebuild\_secondary\_source\_auth\_type | The authorization type to use. The only valid value is OAUTH | `string` | `"OAUTH"` | no |
+| codebuild\_secondary\_source\_buildspec | The build spec declaration to use for this build project's related builds. Optional | `string` | `null` | no |
+| codebuild\_secondary\_source\_git\_clone\_depth | Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`. | `number` | `0` | no |
+| codebuild\_secondary\_source\_git\_submodules\_config | Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`. | `map` | `{}` | no |
+| codebuild\_secondary\_source\_git\_submodules\_config\_fetch\_submodules | If set to true, fetches Git submodules for the AWS CodeBuild build project. | `bool` | `true` | no |
+| codebuild\_secondary\_source\_identifier | The name of a folder named that the source will be checked out into inside the AWS CodeBuild source directory | `string` | `null` | no |
+| codebuild\_secondary\_source\_insecure\_ssl | Ignore SSL warnings when connecting to source control. | `bool` | `false` | no |
+| codebuild\_secondary\_source\_location | The location of the source code from git or s3. | `string` | `null` | no |
+| codebuild\_secondary\_source\_report\_build\_status | Set to true to report the status of a build's start and finish to your source provider. This option is only valid when the type is `BITBUCKET` or `GITHUB`. | `bool` | `false` | no |
+| codebuild\_secondary\_source\_type | The type of repository that contains the secondary source code to be built. Valid values for this parameter are: `CODECOMMIT`, `CODEPIPELINE`, `GITHUB`, `GITHUB_ENTERPRISE`, `BITBUCKET`, `S3` or `NO_SOURCE`. | `string` | `"CODEPIPELINE"` | no |
+| codebuild\_secondary\_sources | Information about the project's secondary sources code. See the related codebuild source objects for descriptions of each parameter.<br>  The parameter `source_identifier` is the name of the directory to clone the secondary source into as a sibling to the primary source code directory.<br>  If this variable is omitted, no secondary sources are created.<br><br>  eg:<pre>codebuild_secondary_sources = [<br>    {<br>      type              = "GITHUB"<br>      location          = "https://github.com/myprofile/myproject-1.git"<br>      source_identifier = "my_awesome_project1"<br>    },<br>    {<br>      type                = "GITHUB"<br>      location            = "https://github.com/myprofile/myproject-2.git"<br>      git_clone_depth     = 1<br>      source_identifier   = "my_awesome_project2"<br>      report_build_status = true<br>      insecure_ssl        = true<br>    }<br>  ]</pre> | `any` | `[]` | no |
 | codebuild\_source | Information about the project's input source code. | `any` | `{}` | no |
 | codebuild\_source\_auth | Information about the authorization settings for AWS CodeBuild to access the source code to be built. | `map(any)` | `{}` | no |
 | codebuild\_source\_auth\_resource | The resource value that applies to the specified authorization type. | `string` | `null` | no |
