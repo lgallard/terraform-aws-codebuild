@@ -18,7 +18,7 @@ module "myapp-project" {
     }
   }
 
-  # Secondary Sources
+  # Secondary Sources (optional)
   codebuild_secondary_sources = [
     {
       type              = "GITHUB"
