@@ -1,7 +1,7 @@
 # CodeBuild
 module "myapp-project" {
 
-  source = "git::https://github.com/lgallard/terraform-aws-codebuild.git"
+  source = "lgallard/codebuild/aws"
 
   name        = "my-app"
   description = "Codebuild for deploying myapp"
@@ -18,6 +18,23 @@ module "myapp-project" {
     }
   }
 
+  # Secondary Sources
+  codebuild_secondary_sources = [
+    {
+      type              = "GITHUB"
+      location          = "https://github.com/myprofile/myproject.git"
+      source_identifier = "my_awesome_project1"
+    },
+    {
+      type                = "GITHUB"
+      location            = "https://github.com/myprofile/myproject2.git"
+      git_clone_depth     = 1
+      source_identifier   = "my_awesome_project2"
+      report_build_status = true
+      insecure_ssl        = true
+    }
+  ]
+
   # Environment
   environment = {
     compute_type    = "BUILD_GENERAL1_SMALL"
@@ -29,11 +46,11 @@ module "myapp-project" {
     variables = [
       {
         name  = "REGISTRY_URL"
-        value = "012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr"
+        value = "012345678910.dkr.ecr.us-west-1.amazonaws.com/my-ecr"
       },
       {
         name  = "AWS_DEFAULT_REGION"
-        value = "us-east-1"
+        value = "us-west-1"
       },
     ]
   }
@@ -68,7 +85,7 @@ module "myapp-project" {
 
 # S3
 resource "aws_s3_bucket" "myapp-project" {
-  bucket = "myapp-project-bucket"
-  acl    = "private"
+  bucket_prefix = "myapp-project-bucket-"
+  acl           = "private"
 }
 

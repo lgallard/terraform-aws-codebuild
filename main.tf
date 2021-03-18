@@ -127,7 +127,7 @@ resource "aws_codebuild_project" "cb_project" {
 
   # Secondary Sources
   dynamic "secondary_sources" {
-    for_each = length(var.codebuild_secondary_sources) == 0 ? [] : var.codebuild_secondary_sources
+    for_each = local.secondary_sources
     content {
       type                = lookup(secondary_sources.value, "type", "CODEBUILD")
       buildspec           = lookup(secondary_sources.value, "buildspec", null)
@@ -252,6 +252,22 @@ locals {
       git_submodules_config = lookup(var.codebuild_source, "git_submodules_config", null) == null ? var.codebuild_source_git_submodules_config : lookup(var.codebuild_source, "git_submodules_config")
     }
   ]
+
+  secondary_sources = [
+    for source in var.codebuild_secondary_sources :
+    {
+      type                  = lookup(source, "type", null) == null ? var.codebuild_secondary_source_type : lookup(source, "type")
+      buildspec             = lookup(source, "buildspec", null) == null ? var.codebuild_secondary_source_buildspec : lookup(source, "buildspec")
+      git_clone_depth       = lookup(source, "git_clone_depth", null) == null ? var.codebuild_secondary_source_git_clone_depth : lookup(source, "git_clone_depth")
+      insecure_ssl          = lookup(source, "insecure_ssl", null) == null ? var.codebuild_secondary_source_insecure_ssl : lookup(source, "insecure_ssl")
+      location              = lookup(source, "location", null) == null ? var.codebuild_secondary_source_location : lookup(source, "location")
+      report_build_status   = lookup(source, "report_build_status", null) == null ? var.codebuild_secondary_source_report_build_status : lookup(source, "report_build_status")
+      source_identifier     = lookup(source, "source_identifier", null) == null ? var.codebuild_secondary_source_identifier : lookup(source, "source_identifier")
+      auth                  = lookup(source, "auth", null) == null ? var.codebuild_secondary_source_auth : lookup(source, "auth")
+      git_submodules_config = lookup(source, "git_submodules_config", null) == null ? var.codebuild_secondary_source_git_submodules_config : lookup(source, "git_submodules_config")
+    }
+  ]
+
 
   # VPC Config
   # If no VPC Config block is provided, build one using the default values
