@@ -1,6 +1,6 @@
 ## 0.5.1 (March 18, 2021)
 
-ENHACEMENTS:
+ENHANCEMENTS:
 
   * Update examples & README
 
