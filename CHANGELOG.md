@@ -1,3 +1,9 @@
+## 0.5.2 (March 18, 2021)
+
+FIXES:
+
+  * Update examples
+
 ## 0.5.1 (March 18, 2021)
 
 ENHANCEMENTS:
