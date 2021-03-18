@@ -60,7 +60,7 @@ resource "aws_codebuild_project" "cb_project" {
         content {
           name  = environment_variable.value.name
           value = environment_variable.value.value
-          type  = lookup(environment_variable.value, "type", null) == null ?  "PLAINTEXT" : environment_variable.value.type
+          type  = lookup(environment_variable.value, "type", null) == null ? "PLAINTEXT" : environment_variable.value.type
         }
       }
     }
@@ -127,15 +127,15 @@ resource "aws_codebuild_project" "cb_project" {
 
   # Secondary Sources
   dynamic "secondary_sources" {
-    for_each = local.secondary_source
+    for_each = length(var.codebuild_secondary_sources) == 0 ? [] : var.codebuild_secondary_sources
     content {
-      type                = lookup(secondary_sources.value, "type")
-      buildspec           = lookup(secondary_sources.value, "buildspec")
-      git_clone_depth     = lookup(secondary_sources.value, "git_clone_depth")
-      insecure_ssl        = lookup(secondary_sources.value, "insecure_ssl")
-      location            = lookup(secondary_sources.value, "location")
-      report_build_status = lookup(secondary_sources.value, "report_build_status")
-      source_identifier   = lookup(secondary_sources.value, "source_identifier")
+      type                = lookup(secondary_sources.value, "type", "CODEBUILD")
+      buildspec           = lookup(secondary_sources.value, "buildspec", null)
+      git_clone_depth     = lookup(secondary_sources.value, "git_clone_depth", 0)
+      insecure_ssl        = lookup(secondary_sources.value, "insecure_ssl", var.codebuild_source_insecure_ssl)
+      location            = lookup(secondary_sources.value, "location", null)
+      report_build_status = lookup(secondary_sources.value, "report_build_status", var.codebuild_source_report_build_status)
+      source_identifier   = lookup(secondary_sources.value, "source_identifier", null)
 
       # Auth
       dynamic "auth" {
@@ -250,22 +250,6 @@ locals {
       report_build_status   = lookup(var.codebuild_source, "report_build_status", null) == null ? var.codebuild_source_report_build_status : lookup(var.codebuild_source, "report_build_status")
       auth                  = lookup(var.codebuild_source, "auth", null) == null ? var.codebuild_source_auth : lookup(var.codebuild_source, "auth")
       git_submodules_config = lookup(var.codebuild_source, "git_submodules_config", null) == null ? var.codebuild_source_git_submodules_config : lookup(var.codebuild_source, "git_submodules_config")
-    }
-  ]
-
-  # Secondary Sources
-  # If no block is provided build one using defaults
-  secondary_source = [
-    {
-      type                  = lookup(var.codebuild_secondary_source, "type", null) == null ? var.codebuild_secondary_source_type : lookup(var.codebuild_secondary_source, "type")
-      buildspec             = lookup(var.codebuild_secondary_source, "buildspec", null) == null ? var.codebuild_secondary_source_buildspec : lookup(var.codebuild_secondary_source, "buildspec")
-      git_clone_depth       = lookup(var.codebuild_secondary_source, "git_clone_depth", null) == null ? var.codebuild_secondary_source_git_clone_depth : lookup(var.codebuild_secondary_source, "git_clone_depth")
-      insecure_ssl          = lookup(var.codebuild_secondary_source, "insecure_ssl", null) == null ? var.codebuild_secondary_source_insecure_ssl : lookup(var.codebuild_secondary_source, "insecure_ssl")
-      location              = lookup(var.codebuild_secondary_source, "location", null) == null ? var.codebuild_secondary_source_location : lookup(var.codebuild_secondary_source, "location")
-      report_build_status   = lookup(var.codebuild_secondary_source, "report_build_status", null) == null ? var.codebuild_secondary_source_report_build_status : lookup(var.codebuild_secondary_source, "report_build_status")
-      source_identifier     = lookup(var.codebuild_secondary_source, "source_identifier", null) == null ? var.codebuild_secondary_source_identifier : lookup(var.codebuild_secondary_source, "source_identifier")
-      auth                  = lookup(var.codebuild_secondary_source, "auth", null) == null ? var.codebuild_secondary_source_auth : lookup(var.codebuild_secondary_source, "auth")
-      git_submodules_config = lookup(var.codebuild_secondary_source, "git_submodules_config", null) == null ? var.codebuild_secondary_source_git_submodules_config : lookup(var.codebuild_secondary_source, "git_submodules_config")
     }
   ]
 
