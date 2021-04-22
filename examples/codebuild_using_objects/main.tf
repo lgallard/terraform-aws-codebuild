@@ -88,4 +88,3 @@ resource "aws_s3_bucket" "myapp-project" {
   bucket_prefix = "myapp-project-bucket-"
   acl           = "private"
 }
-

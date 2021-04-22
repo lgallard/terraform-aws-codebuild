@@ -24,4 +24,3 @@ resource "aws_iam_role_policy" "codebuild_policy" {
   role   = module.myapp-project.service_role_name
   policy = data.aws_iam_policy_document.codebuild_policy_document.json
 }
-
