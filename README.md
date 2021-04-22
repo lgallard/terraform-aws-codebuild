@@ -12,7 +12,7 @@ In the [examples](examples/) folder you can check both approaches in detail and 
 ```
 module "myapp-project" {
 
-  source = "git::https://github.com/lgallard/terraform-aws-codebuild.git"
+  source = "lgallard/codebuild/aws"
 
   name        = "my-app"
   description = "Codebuild for deploying myapp"
@@ -99,7 +99,7 @@ module "myapp-project" {
 ```
 module "myapp-project" {
 
-  source = "git::https://github.com/lgallard/terraform-aws-codebuild.git"
+  source = "lgallard/codebuild/aws"
 
   name        = "my-app-var"
   description = "Codebuild for deploying myapp (variables)"
