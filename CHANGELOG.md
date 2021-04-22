@@ -1,3 +1,15 @@
+## 0.5.3 (April 22, 2021)
+
+ENHANCEMENTS:
+
+* Add pre-commit config file
+* Add .gitignore file
+* Update README
+
+FIXES:
+
+  * Update examples
+
 ## 0.5.2 (March 18, 2021)
 
 FIXES:
@@ -49,7 +61,7 @@ FIXES:
 UPDATES:
 
   * Fix typos in README
-  
+
 ## 0.1.0 (April 17, 2020)
 
 FEATURES:

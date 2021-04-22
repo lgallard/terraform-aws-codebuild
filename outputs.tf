@@ -27,4 +27,3 @@ output "service_role_id" {
   description = "ID of the Service Role created for CodeBuild."
   value       = aws_iam_role.service_role.id
 }
-

@@ -60,4 +60,3 @@ resource "aws_s3_bucket" "myapp-project" {
   bucket = "myapp-project-bucket"
   acl    = "private"
 }
-
