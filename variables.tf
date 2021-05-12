@@ -152,7 +152,7 @@ variable "environment_type" {
 }
 
 variable "environment_image_pull_credentials_type" {
-  description = "The type of credentials AWS CodeBuild uses to pull images in your build. Available values for this parameter are `CODEBUID` or `SERVICE_ROLE`. When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials."
+  description = "The type of credentials AWS CodeBuild uses to pull images in your build. Available values for this parameter are `CODEBUILD` or `SERVICE_ROLE`. When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials."
   type        = string
   default     = "CODEBUILD"
 }
@@ -371,7 +371,7 @@ variable "codebuild_secondary_source_report_build_status" {
 
 variable "codebuild_secondary_source_auth" {
   description = "Information about the authorization settings for AWS CodeBuild to access the source code to be built."
-  type        = map
+  type        = map(any)
   default     = {}
 }
 
@@ -389,7 +389,7 @@ variable "codebuild_secondary_source_auth_resource" {
 
 variable "codebuild_secondary_source_git_submodules_config" {
   description = "Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is `CODECOMMIT`."
-  type        = map
+  type        = map(any)
   default     = {}
 }
 
@@ -435,4 +435,22 @@ variable "tags" {
   description = "A mapping of tags to assign to the resource."
   type        = map(string)
   default     = {}
+}
+
+variable "create_default_service_role" {
+  description = "Should the default service role be created?"
+  type        = bool
+  default     = true
+}
+
+variable "service_role_arn" {
+  description = "A predefined service role to be used"
+  type        = string
+  default     = null
+}
+
+variable "concurrent_build_limit" {
+  description = "Specify a maximum number of concurrent builds for the project."
+  type        = number
+  default     = 1
 }

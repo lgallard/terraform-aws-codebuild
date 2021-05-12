@@ -1,12 +1,13 @@
 resource "aws_codebuild_project" "cb_project" {
-  name           = var.name
-  badge_enabled  = var.badge_enabled
-  build_timeout  = var.build_timeout
-  description    = var.description
-  encryption_key = var.encryption_key
-  service_role   = aws_iam_role.service_role.arn
-  source_version = var.codebuild_source_version
-  queued_timeout = var.queued_timeout
+  name                   = var.name
+  badge_enabled          = var.badge_enabled
+  build_timeout          = var.build_timeout
+  description            = var.description
+  encryption_key         = var.encryption_key
+  service_role           = local.service_role_arn
+  source_version         = var.codebuild_source_version
+  queued_timeout         = var.queued_timeout
+  concurrent_build_limit = var.concurrent_build_limit
 
   # Artifacts
   dynamic "artifacts" {
@@ -277,4 +278,5 @@ locals {
     security_group_ids = lookup(var.vpc_config, "security_group_ids", null) == null ? var.vpc_config_security_group_ids : lookup(var.vpc_config, "security_group_ids")
   }
 
+  service_role_arn = var.create_default_service_role ? element(aws_iam_role.service_role.*.arn, 0) : var.service_role_arn
 }

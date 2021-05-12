@@ -1,14 +1,15 @@
 # Service role
 resource "aws_iam_role" "service_role" {
+  count              = var.create_default_service_role ? 1 : 0
   name               = "${var.name}-service-role"
-  assume_role_policy = data.aws_iam_policy_document.codebuild_assume_role_policy.json
-
+  assume_role_policy = element(data.aws_iam_policy_document.codebuild_assume_role_policy.*.json, 0)
 }
 
 # Add extra polcies
 resource "aws_iam_role_policy" "codebuild_role_extra_policies" {
-  role   = aws_iam_role.service_role.name
-  policy = data.aws_iam_policy_document.codebuild_role_extra_policies.json
+  count  = var.create_default_service_role ? 1 : 0
+  role   = element(aws_iam_role.service_role.*.name, 0)
+  policy = element(data.aws_iam_policy_document.codebuild_role_extra_policies.*.json, 0)
 }
 
 ####################
@@ -17,6 +18,7 @@ resource "aws_iam_role_policy" "codebuild_role_extra_policies" {
 
 # Assume Role
 data "aws_iam_policy_document" "codebuild_assume_role_policy" {
+  count = var.create_default_service_role ? 1 : 0
   statement {
     effect = "Allow"
 
@@ -33,6 +35,7 @@ data "aws_iam_policy_document" "codebuild_assume_role_policy" {
 
 # Extra policies
 data "aws_iam_policy_document" "codebuild_role_extra_policies" {
+  count = var.create_default_service_role ? 1 : 0
   statement {
     effect = "Allow"
 
