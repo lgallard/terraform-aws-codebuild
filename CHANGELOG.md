@@ -1,3 +1,9 @@
+## 0.6.0 (July 1, 2021)
+
+ENHANCEMENTS:
+
+* Add support to use existing service role ARN (thanks @sebbrandt87)
+
 ## 0.5.3 (April 22, 2021)
 
 ENHANCEMENTS:
